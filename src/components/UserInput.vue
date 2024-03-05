@@ -5,10 +5,13 @@
 				<label>Initial investment</label>
 				<input
 					type="number"
-					v-model="userInput.initialInvestment"
+					v-model="investmentStore.userInput.initialInvestment"
 					required
 					@change="
-						handleChange('initialInvestment', userInput.initialInvestment)
+						investmentStore.handleChange(
+							'initialInvestment',
+							investmentStore.userInput.initialInvestment
+						)
 					"
 				/>
 			</p>
@@ -16,9 +19,14 @@
 				<label>Annual investment</label>
 				<input
 					type="number"
-					v-model="userInput.annualInvestment"
+					v-model="investmentStore.userInput.annualInvestment"
 					required
-					@change="handleChange('annualInvestment', userInput.annualInvestment)"
+					@change="
+						investmentStore.handleChange(
+							'annualInvestment',
+							investmentStore.userInput.annualInvestment
+						)
+					"
 				/>
 			</p>
 		</div>
@@ -27,18 +35,28 @@
 				<label for="">Expected return</label>
 				<input
 					type="number"
-					v-model="userInput.expectedReturn"
+					v-model="investmentStore.userInput.expectedReturn"
 					required
-					@change="handleChange('expectedReturn', userInput.expectedReturn)"
+					@change="
+						investmentStore.handleChange(
+							'expectedReturn',
+							investmentStore.userInput.expectedReturn
+						)
+					"
 				/>
 			</p>
 			<p>
 				<label>Duration</label>
 				<input
 					type="number"
-					v-model="userInput.duration"
+					v-model="investmentStore.userInput.duration"
 					required
-					@change="handleChange('duration', userInput.duration)"
+					@change="
+						investmentStore.handleChange(
+							'duration',
+							investmentStore.userInput.duration
+						)
+					"
 				/>
 			</p>
 		</div>
@@ -46,25 +64,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
-
-// const { userInput } = defineProps(["userInput"])
-const userInput = ref({
-	initialInvestment: 10000,
-	annualInvestment: 1200,
-	expectedReturn: 6,
-	duration: 10,
-})
-
-function handleChange(inputIdentifire, newValue) {
-	console.log(userInput.value)
-	return {
-		...userInput,
-		[inputIdentifire]: newValue,
-	}
-}
-
-console.log(userInput.value)
+import { useInvestmentStore } from "../store/investmentStore"
+const investmentStore = useInvestmentStore()
 </script>
-
-<style lang="scss" scoped></style>
